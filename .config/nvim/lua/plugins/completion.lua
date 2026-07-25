@@ -1,10 +1,19 @@
 local add = MiniDeps.add
 
+local add = MiniDeps.add
 add({
     source = 'saghen/blink.cmp',
     depends = {
         'rafamadriz/friendly-snippets',
         'saghen/blink.lib',
+    },
+    hooks = {
+        post_install = function(args)
+            vim.cmd('cd ' .. args.path .. ' | !cargo build --release')
+        end,
+        post_checkout = function(args)
+            vim.cmd('cd ' .. args.path .. ' | !cargo build --release')
+        end,
     },
 })
 
